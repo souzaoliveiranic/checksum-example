@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 
+// Teste teste
+
 class Checksum {
     public:
     virtual unsigned int calcChecksum(std::string message) {
