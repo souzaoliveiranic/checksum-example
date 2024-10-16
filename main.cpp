@@ -2,13 +2,18 @@
 #include <vector>
 #include <string>
 
+using namespace std;
+
 class Checksum {
     public:
     virtual unsigned int calcChecksum(std::string message) {
+
        unsigned int sum = 0;
+
        for(int i = 0; i < message.size(); i++) {
           sum += message[i];
        } 
+
        return sum;
     }
     
@@ -29,6 +34,14 @@ class Checksum {
     }
 };
 
+class ChecksumMod : public Checksum{
+   unsigned int newChecksum(string message) {
+      if(message.size())
+      vector<string> duplas(message.size());
+
+   }
+};
+
 int main() {
     
     Checksum checksum;
@@ -39,3 +52,4 @@ int main() {
     printf("Checksum is %u\n", checksum.calcChecksum(vec));
    return 0;
 }
+
