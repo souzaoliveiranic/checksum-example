@@ -2,22 +2,8 @@
 #include <vector>
 #include <string>
 
-// modificação apenas para testar
-
 class Checksum {
     public:
-    virtual unsigned int calcChecksum(std::string message) {
-       unsigned int sum = 0;
-       for(int i = 0; i < message.size(); i++) {
-          sum += message[i];
-       } 
-       return sum;
-    }
-    
-    virtual bool doChecksum(std::string message, unsigned int checksumValue){
-        return (checksumValue == calcChecksum(message));
-    }
-    
     virtual unsigned int calcChecksum(std::vector<unsigned char> message) {
        unsigned int sum = 0;
        for(int i = 0; i < message.size(); i++) {
