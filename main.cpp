@@ -28,7 +28,7 @@ class Checksum {
         return (checksumValue == calcChecksum(message));
     }
 };
-
+//Comentario
 int main() {
     
     Checksum checksum;
