@@ -34,10 +34,10 @@ public:
     }
 };
 
-// Classe derivada que implementa o checksum XOR
+
 class ChecksumXOR : public Checksum {
 public:
-    // Calcula o checksum usando XOR
+   
     virtual unsigned short calcChecksum(std::vector<unsigned char> message) override {
         unsigned char resultadoXOR = 0;
         for (unsigned int i = 0; i < message.size(); i++) {
@@ -50,17 +50,12 @@ public:
 int main() {
     Checksum checksum;
     std::vector<unsigned char> vec = { 'H', 'e', 'l', 'l', 'o' };
-
-    // Imprime o checksum
     printf("Checksum is %u\n", checksum.calcChecksum(vec));
-
-    // Adiciona o checksum de 3 bytes ao final da mensagem
+    
     checksum.adicionarChecksum(vec, 3);
-
-    // Imprime a mensagem com o checksum adicionado
     printf("Mensagem com checksum: ");
     for (unsigned char c : vec) {
-        printf("%02X ", c); // Mostra os caracteres e o checksum em hexadecimal
+        printf("%02X ", c); 
     }
     printf("\n");
 
