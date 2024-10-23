@@ -13,7 +13,7 @@ public:
         return sum;
     }
     
-    virtual bool doChecksum(std::vector<unsigned char> message, unsigned int checksumValue) {
+    virtual bool doChecksum(std::vector<unsigned char> message, unsigned short checksumValue) {
         return (checksumValue == calcChecksum(message));
     }
 };
