@@ -17,6 +17,11 @@ class Checksum {
     virtual bool doChecksum(std::vector<unsigned char> message, unsigned int checksumValue){
         return (checksumValue == calcChecksum(message));
     }
+
+   void addChecksum(vector<unsigned char>& message, unsigned short checksum){
+      unsigned short checksumValue = checksum;
+      message.push_back(checksumValue);
+   }
 };
 
 class XorChecksum : public Checksum{
@@ -44,6 +49,10 @@ int main() {
    printf("Checksum is %u\n", checksum.calcChecksum(vec));
 
    printf("ChecksumXOR is %u\n", teste.calcChecksum(vec));
+   printf("%u\n", vec.back());
+
+   teste.addChecksum(vec, teste.calcChecksum(vec));
+   printf("%u", vec.back());
    return 0;    
 }
 
