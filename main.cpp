@@ -13,6 +13,13 @@ public:
         return sum;
     }
 
+    void addChecksum(std::vector<unsigned char>& message, unsigned short checksumValue) {
+        char LSB = checksumValue & 0xFF;     
+        char MSB = (checksumValue >> 8) & 0xFF;
+        message.push_back(MSB);
+        message.push_back(LSB);
+    }
+
     virtual bool doChecksum(std::vector<unsigned char> message, unsigned short checksumValue) {
         return (checksumValue == calcChecksum(message));
     }
@@ -38,7 +45,12 @@ int main() {
 
     ChecksumXOR checksumXOR;
     printf("Checksum is %u\n", checksumXOR.calcChecksum(vec));
-    return 0;
 
+    checksum.addChecksum(vec,checksum.calcChecksum(vec));
+    for(unsigned int i=0; i<vec.size(); i++){
+        printf(" %u", vec[i]);
+    }
+
+    return 0;
 }
 
