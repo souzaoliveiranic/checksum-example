@@ -26,7 +26,7 @@ public:
                 resultado_XOR = message[i];
             }
             else {
-                resultado_XOR = resultado_XOR ^ message[i];  // Ponto e vírgula adicionado aqui
+                resultado_XOR = resultado_XOR ^ message[i];  
             }
         }
         return resultado_XOR;
@@ -43,7 +43,7 @@ int main() {
 
     Checksum_XOR checksum_XOR;
     unsigned short checksumXORValue = checksum_XOR.calcChecksum(message);
-    
+
     std::vector<unsigned char> vec = {'H','e','l','l','o'};
     printf("Checksum (Checksum class) is %hu\n", checksum.calcChecksum(vec));
     printf("Checksum (Checksum_XOR class) is %hu\n", checksum_XOR.calcChecksum(vec));
