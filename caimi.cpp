@@ -68,7 +68,7 @@ int main()
    Checksum checksum;
    ChecksumXOR checksumXOR;
 
-   std::vector<unsigned char> vec = {'H', 'E', 'L', 'L', 'O'};
+   std::vector<unsigned char> vec = {'H', 'e', 'l', 'l', 'o'};
 
    // Calcula e exibe o checksum de soma
    printf("Checksum (soma) is %u\n", checksum.calcChecksum(vec));
