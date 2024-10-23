@@ -2,10 +2,10 @@
 #include <vector>
 #include <string>
 
-// Classe base de Checksum
+
 class Checksum {
 public:
-    // Calcula o checksum somando os valores da mensagem
+    
     virtual unsigned short calcChecksum(std::vector<unsigned char> message) {
         unsigned int sum = 0;
         for (int i = 0; i < message.size(); i++) {
@@ -14,7 +14,7 @@ public:
         return sum;
     }
 
-    // Verifica se o checksum corresponde ao valor dado
+    
     virtual bool doChecksum(std::vector<unsigned char> message, unsigned int checksumValue) {
         return (checksumValue == calcChecksum(message));
     }
@@ -37,7 +37,6 @@ public:
 
 class ChecksumXOR : public Checksum {
 public:
-   
     virtual unsigned short calcChecksum(std::vector<unsigned char> message) override {
         unsigned char resultadoXOR = 0;
         for (unsigned int i = 0; i < message.size(); i++) {
@@ -50,12 +49,17 @@ public:
 int main() {
     Checksum checksum;
     std::vector<unsigned char> vec = { 'H', 'e', 'l', 'l', 'o' };
+
+    // Imprime o checksum
     printf("Checksum is %u\n", checksum.calcChecksum(vec));
-    
+
+    // Adiciona o checksum de 3 bytes ao final da mensagem
     checksum.adicionarChecksum(vec, 3);
-    printf("Mensagem com checksum: ");
+
+    // Imprime a mensagem com o checksum adicionado
+    printf("Mensagem com checksum (decimal): ");
     for (unsigned char c : vec) {
-        printf("%02X ", c); 
+        printf("%d ", c); // Mostra os caracteres e o checksum em formato decimal
     }
     printf("\n");
 
