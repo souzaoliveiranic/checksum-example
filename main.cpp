@@ -12,6 +12,12 @@ public:
       return sum;
       
       }
+
+   virtual unsigned short addChecksum(std::vector<unsigned char>& message, unsigned short calcChecksum()) {
+      unsigned short valorChecksum = calcChecksum();
+      message.push_back(static_cast<unsigned short>(valorChecksum)); 
+      return message;
+   }
          
    virtual bool doChecksum(std::vector<unsigned char> message, unsigned int checksumValue){
       return (checksumValue == calcChecksum(message));
@@ -30,10 +36,14 @@ public:
             resultadoXor = resultadoXor ^ message[i];
             }
          } 
-      return resultadoXor;
-      
+      return resultadoXor; 
       }
-         
+
+    virtual unsigned short addChecksumXOR(std::vector<unsigned char>& message, unsigned short calcChecksum()) {
+      unsigned short valorChecksumXor = calcChecksum();
+      message.push_back(static_cast<unsigned short>(valorChecksumXor));
+      return message;
+   }         
 
 };
 
@@ -45,5 +55,20 @@ int main() {
 
    ChecksumXOR checksumXOR;
    printf("ChecksumXOR is %u\n", checksumXOR.calcChecksum(vec));
+
+   checksum.addChecksum(vec, checksum.calcChecksum(vec));
+   printf("Message with Checksum: ");
+   for (unsigned short c : vec) {
+       printf("%02X ", c);
+   }
+   printf("\n");
+
+   checksumXOR.addChecksum(vec, checksumXOR.calcChecksum(vec));
+   printf("Message with ChecksumXOR: ");
+   for (unsigned short c : vec) {
+       printf("%02X ", c);
+   }
+   printf("\n");
+
    return 0;
 }
