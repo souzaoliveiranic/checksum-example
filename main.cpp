@@ -4,19 +4,7 @@
 
 class Checksum {
     public:
-    virtual unsigned int calcChecksum(std::string message) {
-       unsigned int sum = 0;
-       for(int i = 0; i < message.size(); i++) {
-          sum += message[i];
-       } 
-       return sum;
-    }
-    
-    virtual bool doChecksum(std::string message, unsigned int checksumValue){
-        return (checksumValue == calcChecksum(message));
-    }
-    
-    virtual unsigned int calcChecksum(std::vector<unsigned char> message) {
+    virtual unsigned short calcChecksum(std::vector<unsigned char> message) {
        unsigned int sum = 0;
        for(int i = 0; i < message.size(); i++) {
           sum += message[i];
@@ -28,14 +16,30 @@ class Checksum {
         return (checksumValue == calcChecksum(message));
     }
 };
-//Comentario
+
+class ChecksumXOR: public Checksum{
+   public:
+   virtual unsigned short calcChecksum(std::vector<unsigned char> message) {
+       unsigned short resultadoXor = 0;
+       for(unsigned int i = 0; i < message.size(); i++){
+         if (i == 0){
+            resultadoXor = message[i];
+         }
+         else {
+            resultadoXor = resultadoXor ^ message[i];
+         }
+       }
+       return resultadoXor;
+    }
+};
+
 int main() {
     
-    Checksum checksum;
-   std::string str = "Hello, World!";
-   printf("Checksum of '%s' is %u\n", str.c_str(), checksum.calcChecksum(str));
-   
+   Checksum checksum;
    std::vector<unsigned char> vec = {'H','e','l','l','o'};
-    printf("Checksum is %u\n", checksum.calcChecksum(vec));
+   printf("Checksum is %u\n", checksum.calcChecksum(vec));
+
+   ChecksumXOR checksumXOR;
+   printf("Checksum is %u\n", checksumXOR.calcChecksum(vec));
    return 0;
 }
