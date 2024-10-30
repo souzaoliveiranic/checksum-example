@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <vector>
 #include <string>
+#include <bitset>
 
 using namespace std;
 
@@ -41,6 +42,32 @@ class XorChecksum : public Checksum{
     }
    };
 
+class Packer{
+   public:
+   vector<unsigned char> addHead(vector<unsigned char> data_, int id){
+   
+   vector<unsigned char> data = data_;
+   
+   if(id>15||id<0){
+      printf("Id invalido!");
+      data.clear();
+      return data;
+   }
+   if(data.size()>16){
+      printf("Tamanho invalido (>16 bytes)");
+      data.clear();
+      return data;
+   }
+   unsigned char h = '\0';
+  
+      h = h | ((id & 0x0F)<<4);
+      h = h | (data.size() & 0x0F);
+   
+   data.insert(data.begin(), h);
+   return data;
+   }
+};
+
 int main() {  
    XorChecksum teste;
    Checksum checksum;
@@ -52,7 +79,11 @@ int main() {
    printf("%u\n", vec.back());
 
    teste.addChecksum(vec, teste.calcChecksum(vec));
-   printf("%u", vec.back());
-   return 0;    
+   printf("%u\n", vec.back());
+
+   Packer teste2;
+   vec = teste2.addHead(vec, 3);
+   printf("Vec com header: %u", vec[0]);
+   return 0;
 }
 
